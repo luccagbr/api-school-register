@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon --env-file=.env app.js",
-    "create": "node --env-file=.env ./services/db createTables"
+    "create": "node --env-file=.env ./db/index createTables"
   },
   "author": "",
   "license": "ISC",

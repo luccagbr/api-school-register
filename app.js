@@ -1,5 +1,5 @@
 const express = require("express");
-const { pool } = require("./services/db");
+const { pool } = require("./db/index");
 
 const app = express();
 
@@ -15,7 +15,7 @@ app.get("/", (req, res) => {
 
 app.get("/students", (req, res) => {
   pool.connect((err, client, done) => {
-    const query = "SELECT * FROM app_db.students";
+    const query = "SELECT * FROM app_db.students;";
 
     client.query(query, (error, result) => {
       done();
@@ -77,7 +77,7 @@ app.post("/student", (req, res) => {
 
 app.get("/student/:id", (req, res) => {
   pool.connect((err, client, done) => {
-    const query = `SELECT * FROM app_db.student_register WHERE app_db.student_register.id = $1;`;
+    const query = `SELECT * FROM app_db.students WHERE app_db.students.id = $1;`;
 
     const values = [req.params.id || 0];
     client.query(query, values, (error, result) => {
@@ -93,7 +93,7 @@ app.get("/student/:id", (req, res) => {
       } else {
         res.status(200).send({
           status: "Succesfull",
-          result: result.rows[0],
+          result: result,
         });
       }
     });
