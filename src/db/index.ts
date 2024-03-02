@@ -1,6 +1,6 @@
 import "dotenv/config";
 
-import pg, { PoolConfig } from "pg";
+import pg, { Pool, PoolConfig } from "pg";
 
 const config: PoolConfig = {
     database: process.env.DB_NAME,
@@ -11,7 +11,7 @@ const config: PoolConfig = {
     idleTimeoutMillis: 30000,
 };
 
-export const pool = new pg.Pool(config);
+export const pool: Pool = new Pool(config);
 
 pool.on("connect", () => {
     console.log("Connect to the Database");
