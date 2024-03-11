@@ -1,0 +1,96 @@
+import { Request, Response } from "express";
+import { PoolClient, QueryResult } from "pg";
+import { pool } from "src/db/index";
+import { Router } from "express";
+
+const router = Router();
+
+const getAllStudents = (req: Request, res: Response) => {
+    pool.connect((err: Error, client: PoolClient, done: (release?: any) => void) => {
+        const query: string = "SELECT * FROM students;";
+
+        client.query(query, (error: Error, result: QueryResult<any>) => {
+            done();
+
+            if (error) {
+                res.status(400).json(error);
+            }
+
+            if (result.rows && result.rows.length < 1) {
+                res.status(404).send({
+                    status: "Failed",
+                    message: "No student information found",
+                });
+            } else {
+                res.status(200).send({
+                    status: "Successful",
+                    message: "Students information retrieved",
+                    students: result.rows,
+                });
+            }
+        });
+    });
+};
+
+const getStudentById = (req: Request, res: Response) => {
+    pool.connect((err: Error, client: PoolClient, done: (release?: any) => void) => {
+        const query = `SELECT * FROM students WHERE students.id = $1;`;
+
+        const values = [req.params.id || 0];
+        client.query(query, values, (error: Error, result: QueryResult<any>) => {
+            done();
+
+            if (error) {
+                res.status(400).json(error);
+            } else if (!result.rows.length) {
+                res.status(200).send({
+                    status: "Succesful",
+                    result: "Nenhum usuário encontrado!",
+                });
+            } else {
+                res.status(200).send({
+                    status: "Succesfull",
+                    result: result.rows[0],
+                });
+            }
+        });
+    });
+};
+
+const createNewStudent = (req: Request, res: Response) => {
+    const data = {
+        name: req.body.name,
+        age: req.body.age,
+        class: req.body.studentClass,
+        parents_contact: req.body.parentContact,
+        admission_date: req.body.admissionDate,
+    };
+
+    pool.connect((err: Error, client: PoolClient, done: (release?: any) => void) => {
+        const query = `
+        INSERT INTO students(name, age, class, parent_contact, admission_date)
+        VALUES ($1, $2, $3, $4, $5) RETURNING *
+        `;
+        const values = [data.name, data.age, data.class, data.parents_contact, data.admission_date];
+
+        client.query(query, values, (error: Error, result: QueryResult<any>) => {
+            done();
+            if (error) {
+                res.status(400).json(error);
+            }
+            res.status(202).send({
+                status: "Succesful",
+                result: result.rows[0],
+            });
+        });
+    });
+};
+
+router.get("/", (req: Request, res: Response) => {
+    res.send("Welcome to School API");
+});
+router.get("/student/:id", getStudentById);
+router.get("/students", getAllStudents);
+router.post("/student", createNewStudent);
+
+export default router;
