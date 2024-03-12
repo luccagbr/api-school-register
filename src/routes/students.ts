@@ -5,6 +5,10 @@ import { Router } from "express";
 
 const router = Router();
 
+const welcomeApi = (req: Request, res: Response) => {
+    res.send("Welcome to API");
+};
+
 const getAllStudents = (req: Request, res: Response) => {
     pool.connect((err: Error, client: PoolClient, done: (release?: any) => void) => {
         const query: string = "SELECT * FROM students;";
@@ -66,6 +70,22 @@ const createNewStudent = (req: Request, res: Response) => {
         admission_date: req.body.admissionDate,
     };
 
+    if (!data.name) {
+        throw new Error("Nome do aluno é obrigatório!");
+    }
+
+    if (!data.age) {
+        throw new Error("Idade do aluno é obrigatória!");
+    }
+
+    if (!data.class) {
+        throw new Error("Sala do aluno é obrigatória!");
+    }
+
+    if (!data.admission_date) {
+        throw new Error("Data de inscrição do aluno é obrigatória!");
+    }
+
     pool.connect((err: Error, client: PoolClient, done: (release?: any) => void) => {
         const query = `
         INSERT INTO students(name, age, class, parent_contact, admission_date)
@@ -86,11 +106,9 @@ const createNewStudent = (req: Request, res: Response) => {
     });
 };
 
-router.get("/", (req: Request, res: Response) => {
-    res.send("Welcome to School API");
-});
-router.get("/student/:id", getStudentById);
-router.get("/students", getAllStudents);
+router.get("", welcomeApi);
+router.get("student/:id", getStudentById);
+router.get("student/all-students", getAllStudents);
 router.post("/student", createNewStudent);
 
 export default router;
