@@ -1,11 +1,12 @@
 import { Request, Response } from "express";
 import { PoolClient, QueryResult } from "pg";
-import { pool } from "src/db/index";
 import { Router } from "express";
-
+import { pool } from "../db/index";
+import logger from "../utils/winston-logger";
 const router = Router();
 
 const welcomeApi = (req: Request, res: Response) => {
+    logger.info(req);
     res.send("Welcome to API");
 };
 
@@ -106,9 +107,9 @@ const createNewStudent = (req: Request, res: Response) => {
     });
 };
 
-router.get("", welcomeApi);
-router.get("student/:id", getStudentById);
-router.get("student/all-students", getAllStudents);
+router.get("/", welcomeApi);
+router.get("/student/:id", getStudentById);
+router.get("/student/all-students", getAllStudents);
 router.post("/student", createNewStudent);
 
 export default router;

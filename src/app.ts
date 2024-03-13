@@ -1,15 +1,16 @@
 require("dotenv").config();
 
-import express, { Express } from "express";
-import bodyParser from "body-parser";
+import * as bodyParser from "body-parser";
 import studentRouter from "./routes/students";
 import { errorHandler } from "./middlewares/error-handler";
 
-const app: Express = express();
+const express = require("express'");
 
-app.use(studentRouter);
+const app = express();
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(studentRouter);
 app.use(errorHandler);
 
 export default app;
