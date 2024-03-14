@@ -18,7 +18,7 @@ const getAllStudents = (req: Request, res: Response) => {
             done();
 
             if (error) {
-                res.status(400).json(error);
+                throw new Error(`${error}`);
             }
 
             if (result.rows && result.rows.length < 1) {
