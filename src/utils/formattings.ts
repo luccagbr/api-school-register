@@ -35,3 +35,18 @@ export function formatDateOrDateAndTime(date: Date, time?: boolean) {
 
     return day + "/" + month + "/" + year;
 }
+
+export function converterDateAndTimeForLocal(dateTime: Date) {
+    const options: Intl.DateTimeFormatOptions = {
+        timeZone: "America/Sao_Paulo",
+        year: "numeric",
+        month: "numeric",
+        day: "numeric",
+        hour: "numeric",
+        minute: "numeric",
+    };
+
+    const dateTimeBrazil = dateTime.toLocaleDateString("pt-BR", options);
+
+    return dateTimeBrazil;
+}
