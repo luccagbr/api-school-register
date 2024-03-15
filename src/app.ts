@@ -3,7 +3,7 @@ require("dotenv").config();
 import * as bodyParser from "body-parser";
 import studentRouter from "./routes/students";
 import { errorHandler } from "./middlewares/error-handler";
-import * as express from "express";
+import express from "express";
 
 const app = express();
 

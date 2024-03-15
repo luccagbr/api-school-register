@@ -3,10 +3,11 @@ import { PoolClient, QueryResult } from "pg";
 import { Router } from "express";
 import { pool } from "../db/index";
 import logger from "../utils/winston-logger";
+import { formatDateOrDateAndTime } from "src/utils/formattings";
 const router = Router();
 
 const welcomeApi = (req: Request, res: Response) => {
-    logger.info(req);
+    logger.info(`The api has been accessed in ${formatDateOrDateAndTime(new Date(), true)} `);
     res.send("Welcome to API");
 };
 
