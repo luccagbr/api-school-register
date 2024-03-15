@@ -109,8 +109,8 @@ const createNewStudent = (req: Request, res: Response) => {
 };
 
 router.get("/", welcomeApi);
-router.get("/student/:id", getStudentById);
 router.get("/student/all-students", getAllStudents);
+router.get("/student/:id", getStudentById);
 router.post("/student", createNewStudent);
 
 export default router;
