@@ -41,12 +41,12 @@ export const getStudentById = (req: Request, res: Response) => {
                 res.status(400).json(error);
             } else if (!result.rows.length) {
                 res.status(200).send({
-                    status: "Succesful",
+                    status: "Successful",
                     result: "Nenhum usuário encontrado!",
                 });
             } else {
                 res.status(200).send({
-                    status: "Succesfull",
+                    status: "Successfull",
                     result: result.rows[0],
                 });
             }
