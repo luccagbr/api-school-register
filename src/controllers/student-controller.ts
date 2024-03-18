@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { PoolClient, QueryResult } from "pg";
-import { pool } from "src/db";
+import { pool } from "../db/index";
 
 export const getAllStudents = (req: Request, res: Response) => {
     pool.connect((err: Error, client: PoolClient, done: (release?: any) => void) => {
