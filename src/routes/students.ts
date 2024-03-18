@@ -3,7 +3,7 @@ import { PoolClient, QueryResult } from "pg";
 import { Router } from "express";
 import { pool } from "../db/index";
 import logger from "../utils/winston-logger";
-import { formatDateOrDateAndTime } from "src/utils/formattings";
+import { formatDateOrDateAndTime } from "../utils/formattings";
 const router = Router();
 
 const welcomeApi = (req: Request, res: Response) => {
@@ -67,9 +67,9 @@ const createNewStudent = (req: Request, res: Response) => {
     const data = {
         name: req.body.name,
         age: req.body.age,
-        class: req.body.studentClass,
-        parents_contact: req.body.parentContact,
-        admission_date: req.body.admissionDate,
+        class: req.body.student_class,
+        parents_contact: req.body.parent_contact,
+        admission_date: req.body.admission_date,
     };
 
     if (!data.name) {
