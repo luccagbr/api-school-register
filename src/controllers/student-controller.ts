@@ -1,6 +1,5 @@
-import { Request, Response } from "express";
-import { PoolClient, QueryResult } from "pg";
-// import { pool } from "../db/index";
+import { NextFunction, Request, Response } from "express";
+import * as studentModel from "../models/app-model";
 
 export const getAllStudents = (req: Request, res: Response) => {
     // pool.connect((err: Error, client: PoolClient, done: (release?: any) => void) => {
@@ -49,47 +48,34 @@ export const getStudentById = (req: Request, res: Response) => {
     // });
 };
 
-export const createNewStudent = (req: Request, res: Response) => {
-    const data = {
-        name: req.body.name,
-        age: req.body.age,
-        class: req.body.student_class,
-        parents_contact: req.body.parent_contact,
-        admission_date: req.body.admission_date,
-    };
+export const createNewStudent = async (req: Request, res: Response, next: NextFunction): Promise<any> => {
+    try {
+        const data = {
+            name: req.body.name,
+            document_cpf: req.body.document_cpf,
+            birthday_date: req.body.birthday_date,
+            id_class: req.body.id_class,
+            id_course: req.body.id_course,
+            cel_phone: req.body.cel_phone,
+            parents_contact: req.body.parent_contact,
+            admission_date: req.body.admission_date,
+        };
 
-    if (!data.name) {
-        throw new Error("Nome do aluno é obrigatório!");
+        if (!data.name) {
+            throw new Error("Nome do aluno é obrigatório!");
+        }
+
+        if (data.document_cpf) {
+            throw new Error("Cpf do aluno é obrigatório!");
+        }
+
+        if (!data.birthday_date) {
+            throw new Error("Idade do aluno é obrigatória!");
+        }
+
+        const createdStudent = await studentModel.createStudent(data);
+        res.status(201).send(createdStudent);
+    } catch (error) {
+        next(error);
     }
-
-    if (!data.age) {
-        throw new Error("Idade do aluno é obrigatória!");
-    }
-
-    if (!data.class) {
-        throw new Error("Sala do aluno é obrigatória!");
-    }
-
-    if (!data.admission_date) {
-        throw new Error("Data de inscrição do aluno é obrigatória!");
-    }
-
-    // pool.connect((err: Error, client: PoolClient, done: (release?: any) => void) => {
-    //     const query = `
-    //     INSERT INTO students(name, age, class, parent_contact, admission_date)
-    //     VALUES ($1, $2, $3, $4, $5) RETURNING *
-    //     `;
-    //     const values = [data.name, data.age, data.class, data.parents_contact, data.admission_date];
-
-    //     client.query(query, values, (error: Error, result: QueryResult<any>) => {
-    //         done();
-    //         if (error) {
-    //             res.status(400).json(error);
-    //         }
-    //         res.status(202).send({
-    //             status: "Succesful",
-    //             result: result.rows[0],
-    //         });
-    //     });
-    // });
 };
