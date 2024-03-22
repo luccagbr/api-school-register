@@ -131,7 +131,7 @@ interface IStudentProps {
     birthday_date: number;
     id_class: number;
     id_course: number;
-    parents_contact?: string;
+    parent_contact?: string;
     cel_phone?: string;
     admission_date?: string;
 }
@@ -184,7 +184,7 @@ export const createStudent = async (student: IStudentProps) => {
                         VALUES ($1, $2, $3, $4, $5)
                         RETURNING *;
                 `,
-                [student.name, student.document_cpf, student.birthday_date, student.cel_phone, student.parents_contact],
+                [student.name, student.document_cpf, student.birthday_date, student.cel_phone, student.parent_contact],
             );
         }
 

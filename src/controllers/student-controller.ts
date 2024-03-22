@@ -57,7 +57,7 @@ export const createNewStudent = async (req: Request, res: Response, next: NextFu
             id_class: req.body.id_class,
             id_course: req.body.id_course,
             cel_phone: req.body.cel_phone,
-            parents_contact: req.body.parent_contact,
+            parent_contact: req.body.parent_contact,
             admission_date: req.body.admission_date,
         };
 
