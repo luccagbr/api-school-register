@@ -136,6 +136,21 @@ interface IStudentProps {
     admission_date?: string;
 }
 
+export const getAllStudents = () => {
+    try {
+    } catch (error) {
+        if (error.name === "DuplicateKeyError") {
+            throw error;
+        }
+
+        throw {
+            name: "DatabaseQueryError",
+            message: "Error creating student",
+            cause: error,
+        };
+    }
+};
+
 export const createStudent = async (student: IStudentProps) => {
     try {
         const existClassId = await db.oneOrNone(
@@ -144,6 +159,7 @@ export const createStudent = async (student: IStudentProps) => {
                 FROM class
                 WHERE id = $1 AND id_course = $2;
             `,
+            [student.id_class, student.id_course],
         );
 
         if (!existClassId) {

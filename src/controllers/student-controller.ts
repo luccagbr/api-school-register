@@ -1,28 +1,12 @@
 import { NextFunction, Request, Response } from "express";
 import * as studentModel from "../models/app-model";
 
-export const getAllStudents = (req: Request, res: Response) => {
-    // pool.connect((err: Error, client: PoolClient, done: (release?: any) => void) => {
-    //     const query: string = "SELECT * FROM students;";
-    //     client.query(query, (error: Error, result: QueryResult<any>) => {
-    //         done();
-    //         if (error) {
-    //             throw new Error(`${error}`);
-    //         }
-    //         if (result.rows && result.rows.length < 1) {
-    //             res.status(404).send({
-    //                 status: "Failed",
-    //                 message: "No student information found",
-    //             });
-    //         } else {
-    //             res.status(200).send({
-    //                 status: "Successful",
-    //                 message: "Students information retrieved",
-    //                 students: result.rows,
-    //             });
-    //         }
-    //     });
-    // });
+export const getAllStudents = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+        const result = await studentModel.getAllStudents();
+    } catch (error) {
+        next(error);
+    }
 };
 
 export const getStudentById = (req: Request, res: Response) => {
