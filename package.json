@@ -12,6 +12,10 @@
         "dev": "nodemon ./src/index.ts",
         "start": "nodemon dist/index.js",
         "migrate": "node-pg-migrate",
+        "migrate:up": "node-pg-migrate up",
+        "migrate:down": "node-pg-migrate down",
+        "migrate:redo": "node-pg-migrate redo",
+        "migrate:create": "node-pg-migrate create --j sql",
         "migration:default": "tsc && node-pg-migrate -d postgres://lucca:password:123456@localhost:5432/school_register -m dist/migrations up"
     },
     "author": "",
