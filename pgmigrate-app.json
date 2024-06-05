@@ -1,0 +1,8 @@
+{
+    "schema": "public",
+    "migrationsSchema": "public",
+    "migrationsDir": "./migrations",
+    "migrationFileLanguage": "ts",
+    "tsconfig": "tsconfig.json",
+    "databaseUrlVar": "DATABASE_URL"
+}

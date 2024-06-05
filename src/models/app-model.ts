@@ -1,125 +1,15 @@
 import db from "../db/index";
 
-const createPeopleTable = async () => {
+export const getAllStudents = () => {
     try {
-        const createPeopleTable = await db.none(
-            `
-                CREATE TABLE IF NOT EXISTS
-                    people(
-                        id SERIAL PRIMARY KEY,
-                        name VARCHAR(128) NOT NULL,
-                        document_cpf VARCHAR(11) NOT NULL, 
-                        birthday_date DATE NOT NULL,
-                        cel_phone BIGINT,
-                        parent_contact BIGINT,
-                        created_at TIMESTAMP DEFAULT now(),
-                        updated_at TIMESTAMP 
-                    )
-            `,
-        );
-        console.log("sucess1");
-        return { message: "People table created successfully", status: true };
     } catch (error) {
-        console.log(error, 44);
-        throw {
-            name: "TableCreationError",
-            message: "Error creating people table",
-            cause: error,
-        };
-    }
-};
+        if (error.name === "DuplicateKeyError") {
+            throw error;
+        }
 
-const createCourseTable = async () => {
-    try {
-        const createCoursetable = await db.none(
-            `
-                CREATE TABLE IF NOT EXISTS
-                    course(
-                        id SERIAL PRIMARY KEY,
-                        name VARCHAR(128) NOT NULL,
-                        is_active BOOLEAN DEFAULT TRUE,
-                        created_at TIMESTAMP DEFAULT now(),
-                        updated_at TIMESTAMP
-                    )
-            `,
-        );
-        console.log("success2");
-        return { message: "Course table created successfully", status: true };
-    } catch (error) {
-        console.log(error, 44);
         throw {
-            name: "TableCreationError",
-            message: "Error creating course table",
-            cause: error,
-        };
-    }
-};
-
-const createClassTable = async () => {
-    try {
-        const createClassTable = await db.none(
-            `
-                CREATE TABLE IF NOT EXISTS
-                    class(
-                        id SERIAL PRIMARY KEY,
-                        id_course INTEGER NOT NULL,
-                        name VARCHAR(128) NOT NULL,
-                        is_active BOOLEAN DEFAULT true,
-                        created_at TIMESTAMP DEFAULT now(),
-                        updated_at TIMESTAMP,
-                        CONSTRAINT fk_class_course
-                            FOREIGN KEY(id_course)
-                                REFERENCES course(id)
-                                ON DELETE NO ACTION
-                                ON UPDATE CASCADE
-                    )
-            `,
-        );
-        console.log("success3");
-        return { message: "Class table created successfully", status: true };
-    } catch (error) {
-        console.log(error, 44);
-        throw {
-            name: "TableCreationError",
-            message: "Error creating class table",
-            cause: error,
-        };
-    }
-};
-
-const createStudentTable = async () => {
-    try {
-        const createStudentTable = await db.none(
-            `
-            CREATE TABLE IF NOT EXISTS
-                student(
-                    id SERIAL PRIMARY KEY,
-                    id_people INTEGER NOT NULL
-                    id_class INTEGER NOT NULL,
-                    admission_date DATE NOT NULL,
-                    is_active BOOLEAN DEFAULT true,
-                    created_at TIMESTAMP DEFAULT now(),
-                    updated_at TIMESTAMP,
-                    CONSTRAINT fk_people_student
-                        FOREIGN KEY(id_people)
-                            REFERENCES people(id)
-                            ON DELETE NO ACTION
-                            ON UPDATE CASCADE
-                    CONSTRAINT fk_student_class
-                        FOREIGN KEY(id_class)
-                            REFERENCES class(id)
-                            ON DELETE NO ACTION
-                            ON UPDATE CASCADE
-                    );
-            `,
-        );
-        console.log("success4");
-        return { message: "Student table created successfully", status: true };
-    } catch (error) {
-        console.log(error, 44);
-        throw {
-            name: "TableCreationError",
-            message: "Error creating student table",
+            name: "DatabaseQueryError",
+            message: "Error creating student",
             cause: error,
         };
     }
@@ -135,21 +25,6 @@ interface IStudentProps {
     cel_phone?: string;
     admission_date?: string;
 }
-
-export const getAllStudents = () => {
-    try {
-    } catch (error) {
-        if (error.name === "DuplicateKeyError") {
-            throw error;
-        }
-
-        throw {
-            name: "DatabaseQueryError",
-            message: "Error creating student",
-            cause: error,
-        };
-    }
-};
 
 export const createStudent = async (student: IStudentProps) => {
     try {
