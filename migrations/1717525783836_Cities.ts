@@ -4,16 +4,16 @@ export const shorthands: ColumnDefinitions | undefined = undefined;
 
 export async function up(pgm: MigrationBuilder): Promise<void> {
     pgm.sql(`
-        CREATE TABLE city (
+        CREATE TABLE cities (
             id SERIAL PRIMARY KEY,
             id_state INTEGER NOT NULL,
             name VARCHAR(255) NOT NULL,
             number_ibge INTEGER,
             number_siafi INTEGER,
-            FOREIGN KEY (id_state) REFERENCES state (id) ON DELETE NO ACTION ON UPDATE CASCADE
+            FOREIGN KEY (id_state) REFERENCES states (id) ON DELETE NO ACTION ON UPDATE CASCADE
         );
 
-        INSERT INTO city (id_state, name, number_ibge, number_siafi) VALUES
+        INSERT INTO cities (id_state, name, number_ibge, number_siafi) VALUES
             (11, 'Alta Floresta D''Oeste', '1100015', '0033'),
             (11, 'Ariquemes', '1100023', '0007'),
             (11, 'Cabixi', '1100031', '0037'),
@@ -740,7 +740,7 @@ export async function up(pgm: MigrationBuilder): Promise<void> {
             (22, 'Cocal', '2202703', '1053'),
             (22, 'Cocal de Telha', '2202711', '0304'),
             (22, 'Cocal dos Alves', '2202729', '0306');
-            INSERT INTO city (id_state, name, number_ibge, number_siafi) VALUES
+            INSERT INTO cities (id_state, name, number_ibge, number_siafi) VALUES
             (22, 'Coivaras', '2202737', '0995'),
             (22, 'Colônia do Gurguéia', '2202752', '2249'),
             (22, 'Colônia do Piauí', '2202778', '2253'),
@@ -1473,7 +1473,7 @@ export async function up(pgm: MigrationBuilder): Promise<void> {
             ( 25, 'Taperoá', '2516508', '2231'),
             ( 25, 'Tavares', '2516607', '2233'),
             ( 25, 'Teixeira', '2516706', '2235');
-            INSERT INTO city (id_state, name, number_ibge, number_siafi) VALUES            
+            INSERT INTO cities (id_state, name, number_ibge, number_siafi) VALUES            
             (25, 'Tenório', '2516755', '0538'),
             (25, 'Triunfo', '2516805', '2237'),
             (25, 'Uiraúna', '2516904', '2239'),
@@ -2210,7 +2210,7 @@ export async function up(pgm: MigrationBuilder): Promise<void> {
             (29, 'Sátiro Dias', '2929701', '3893'),
             (29, 'Saubara', '2929750', '3037'),
             (29, 'Saúde', '2929800', '3895');
-            INSERT INTO city (id_state, name, number_ibge, number_siafi) VALUES
+            INSERT INTO cities (id_state, name, number_ibge, number_siafi) VALUES
             (29, 'Seabra', '2929909', '3897'),
             (29, 'Sebastião Laranjeiras', '2930006', '3899'),
             (29, 'Senhor do Bonfim', '2930105', '3901'),
@@ -2944,7 +2944,7 @@ export async function up(pgm: MigrationBuilder): Promise<void> {
             (31, 'Santana de Cataguases', '3158409', '5167'),
             (31, 'Santana de Pirapama', '3158508', '5169'),
             (31, 'Santana do Deserto', '3158607', '5171');
-            INSERT INTO city (id_state, name, number_ibge, number_siafi) VALUES
+            INSERT INTO cities (id_state, name, number_ibge, number_siafi) VALUES
             (31, 'Santana do Garambéu', '3158706', '5173'),
             (31, 'Santana do Jacaré', '3158805', '5175'),
             (31, 'Santana do Manhuaçu', '3158904', '5177'),
@@ -3672,7 +3672,7 @@ export async function up(pgm: MigrationBuilder): Promise<void> {
             (35, 'Oriente', '3534104', '6783'),
             (35, 'Orindiúva', '3534203', '6785'),
             (35, 'Orlândia', '3534302', '6787');
-            INSERT INTO city (id_state, name, number_ibge, number_siafi) VALUES
+            INSERT INTO cities (id_state, name, number_ibge, number_siafi) VALUES
             (35, 'Osasco', '3534401', '6789'),
             (35, 'Oscar Bressane', '3534500', '6791'),
             (35, 'Osvaldo Cruz', '3534609', '6793'),
@@ -4398,7 +4398,7 @@ export async function up(pgm: MigrationBuilder): Promise<void> {
             (42, 'Chapadão do Lageado', '4204194', '0908'),
             (42, 'Chapecó', '4204202', '8081'),
             (42, 'Cocal do Sul', '4204251', '5543');
-            INSERT INTO city (id_state, name, number_ibge, number_siafi) VALUES
+            INSERT INTO cities (id_state, name, number_ibge, number_siafi) VALUES
             (42, 'Concórdia', '4204301', '8083'),
             (42, 'Cordilheira Alta', '4204350', '5579'),
             (42, 'Coronel Freitas', '4204400', '8085'),
@@ -5126,7 +5126,7 @@ export async function up(pgm: MigrationBuilder): Promise<void> {
             (50, 'Água Clara', '5000203', '9003'),
             (50, 'Alcinópolis', '5000252', '0141'),
             (50, 'Amambai', '5000609', '9011');
-            INSERT INTO city (id_state, name, number_ibge, number_siafi) VALUES
+            INSERT INTO cities (id_state, name, number_ibge, number_siafi) VALUES
             (50, 'Anastácio', '5000708', '9013'),
             (50, 'Anaurilândia', '5000807', '9015'),
             (50, 'Angélica', '5000856', '9169'),

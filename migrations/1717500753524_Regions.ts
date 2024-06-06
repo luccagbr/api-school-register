@@ -4,12 +4,12 @@ export const shorthands: ColumnDefinitions | undefined = undefined;
 
 export async function up(pgm: MigrationBuilder): Promise<void> {
     pgm.sql(`
-        CREATE TABLE region(
+        CREATE TABLE regions(
             id SERIAL PRIMARY KEY,
             name VARCHAR(255)
         );
 
-        INSERT INTO region (name)
+        INSERT INTO regions (name)
         VALUES
             ('Norte'),
             ('Nordeste'),
@@ -21,6 +21,6 @@ export async function up(pgm: MigrationBuilder): Promise<void> {
 
 export async function down(pgm: MigrationBuilder): Promise<void> {
     pgm.sql(`
-        DROP TABLE region;
+        DROP TABLE regions;
     `);
 }

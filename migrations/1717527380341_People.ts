@@ -19,7 +19,7 @@ export async function up(pgm: MigrationBuilder): Promise<void> {
             marital_status marital_status_enum NOT NULL,
             created_at TIMESTAMP DEFAULT now(),
             updated_at TIMESTAMP,
-            FOREIGN KEY (id_address) REFERENCES address (id) ON DELETE NO ACTION ON UPDATE CASCADE
+            FOREIGN KEY (id_address) REFERENCES addresses (id) ON DELETE NO ACTION ON UPDATE CASCADE
         );
 
         INSERT INTO people (name, email, document_cpf, gender, marital_status)

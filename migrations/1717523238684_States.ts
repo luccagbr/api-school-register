@@ -4,15 +4,15 @@ export const shorthands: ColumnDefinitions | undefined = undefined;
 
 export async function up(pgm: MigrationBuilder): Promise<void> {
     pgm.sql(`
-        CREATE TABLE state (
+        CREATE TABLE states (
             id SERIAL PRIMARY KEY,
             id_region INTEGER NOT NULL,
             abbreviation VARCHAR NOT NULL,
             name VARCHAR NOT NULL,
-            FOREIGN KEY (id_region) REFERENCES region (id) ON DELETE NO ACTION ON UPDATE CASCADE
+            FOREIGN KEY (id_region) REFERENCES regions (id) ON DELETE NO ACTION ON UPDATE CASCADE
         );
 
-        INSERT INTO state (id, id_region, name, abbreviation) VALUES
+        INSERT INTO states (id, id_region, name, abbreviation) VALUES
             (11, 1, 'Rondônia', 'RO'),
             (12, 1, 'Acre', 'AC'),
             (13, 1, 'Amazonas', 'AM'),
@@ -47,7 +47,7 @@ export async function up(pgm: MigrationBuilder): Promise<void> {
 export async function down(pgm: MigrationBuilder): Promise<void> {
     pgm.sql(
         `
-            DROP TABLE state;
+            DROP TABLE states;
         `,
     );
 }
