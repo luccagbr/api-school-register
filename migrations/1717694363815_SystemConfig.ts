@@ -4,23 +4,23 @@ export const shorthands: ColumnDefinitions | undefined = undefined;
 
 export async function up(pgm: MigrationBuilder): Promise<void> {
     pgm.sql(`
-        CREATE TABLE access_groups (
+        CREATE TABLE system_configs (
             id SERIAL PRIMARY KEY,
-            name VARCHAR(255) NOT NULL,
-            description VARCHAR(255) NOT NULL,
+            variable VARCHAR(255) NOT NULL,
+            value VARCHAR(255) NOT NULL,
             is_active BOOLEAN DEFAULT TRUE,
             created_at TIMESTAMP DEFAULT now(),
             updated_at TIMESTAMP
         );
 
-        INSERT INTO access_groups (name, description)
-        VALUES
-            ('Administrador', 'Grupo de acesso para administradores do sistema');
+        INSERT INTO system_configs (variable, value)
+        VALUES 
+            ('GROUP_ADMIN', (SELECT id FROM access_groups WHERE name = 'Administrador'));
     `);
 }
 
 export async function down(pgm: MigrationBuilder): Promise<void> {
     pgm.sql(`
-        DROP DATABASE access_groups;
+        DROP TABLE system_configs;
     `);
 }
