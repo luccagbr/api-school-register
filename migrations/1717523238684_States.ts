@@ -40,7 +40,7 @@ export async function up(pgm: MigrationBuilder): Promise<void> {
             (51, 5, 'Mato Grosso', 'MT'),
             (52, 5, 'Goiás', 'GO'),
             (53, 5, 'Distrito Federal', 'DF');
-            ALTER SEQUENCE state_id_seq RESTART WITH 54;
+            ALTER SEQUENCE states_id_seq RESTART WITH 54;
     `);
 }
 

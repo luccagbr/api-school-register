@@ -20,14 +20,14 @@ export async function up(pgm: MigrationBuilder): Promise<void> {
             FOREIGN KEY (created_by) REFERENCES users (id) ON DELETE NO ACTION ON UPDATE CASCADE
         );
 
-        INSERT INTO user (id_person, login, password)
+        INSERT INTO users (id_person, login, password)
         VALUES 
             ((SELECT id FROM people WHERE email = 'luccavitalc@gmail.com'), (SELECT email FROM people WHERE email = 'luccavitalc@gmail.com'), '123456');
 
-        UPDATE user SET created_by = (SELECT id FROM user WHERE login = 'luccavitalc@gmail.com')
+        UPDATE users SET created_by = (SELECT id FROM user WHERE login = 'luccavitalc@gmail.com')
         WHERE login = 'luccavitalc@gmail.com';
 
-        ALTER TABLE user
+        ALTER TABLE users
             ALTER COLUMN created_by SET NOT NULL;
     `);
 }
