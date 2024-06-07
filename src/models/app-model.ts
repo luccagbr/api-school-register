@@ -9,7 +9,7 @@ export const getAllStudents = () => {
 
         throw {
             name: "DatabaseQueryError",
-            message: "Error creating student",
+            message: "Erro ao criar estudante.",
             cause: error,
         };
     }
@@ -40,7 +40,7 @@ export const createStudent = async (student: IStudentProps) => {
         if (!existClassId) {
             throw {
                 name: "DatabaseQueryError",
-                message: "Class by id not found",
+                message: "Registro de turma não entrado.",
                 status: false,
             };
         }
@@ -61,7 +61,7 @@ export const createStudent = async (student: IStudentProps) => {
             if (existStudentByCpf.student) {
                 throw {
                     name: "DatabaseQueryError",
-                    message: "The student is already linked to the class",
+                    message: "O estudante já está vinculado a turma.",
                     status: false,
                 };
             }
@@ -103,7 +103,7 @@ export const createStudent = async (student: IStudentProps) => {
         }
         throw {
             name: "DatabaseQueryError",
-            message: "Error creating student",
+            message: "Erro ao criar estudante",
             cause: error,
         };
     }

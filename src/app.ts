@@ -14,7 +14,7 @@ app.use(cors({ origin: "*" }));
 app.use(studentRouter);
 app.use(errorHandler);
 app.use((req: express.Request, res: express.Response, next: express.NextFunction) => {
-    res.status(404).send({ status: "Route not found" });
+    res.status(404).send({ status: "Rota não encontrada." });
     next();
 });
 
