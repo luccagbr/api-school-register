@@ -4,7 +4,7 @@ export const shorthands: ColumnDefinitions | undefined = undefined;
 
 export async function up(pgm: MigrationBuilder): Promise<void> {
     pgm.sql(`
-        CREATE TABLE regions(
+        CREATE TABLE IF NOT EXISTS regions(
             id SERIAL PRIMARY KEY,
             name VARCHAR(255)
         );

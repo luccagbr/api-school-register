@@ -8,7 +8,7 @@ export async function up(pgm: MigrationBuilder): Promise<void> {
 
         CREATE TYPE marital_status_enum AS ENUM ('Solteiro(a)', 'Casado(a)', 'Viuvo(a)', 'Divorciado(a)');
     
-        CREATE TABLE people (
+        CREATE TABLE IF NOT EXISTS people (
             id SERIAL PRIMARY KEY,
             id_address INTEGER,
             name VARCHAR(255) NOT NULL,
