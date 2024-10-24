@@ -24,7 +24,7 @@ export async function up(pgm: MigrationBuilder): Promise<void> {
 
         INSERT INTO people (name, email, document_cpf, gender, marital_status)
         VALUES
-            ('Developer', 'luccavitalc@gmail.com', '02065105607', 'Masculino', 'Solteiro(a)');
+            ('Developer', 'lgctech7@gmail.com', '02065105607', 'Masculino', 'Solteiro(a)');
     `);
 }
 

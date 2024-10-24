@@ -22,10 +22,10 @@ export async function up(pgm: MigrationBuilder): Promise<void> {
 
         INSERT INTO users (id_person, login, password)
         VALUES 
-            ((SELECT id FROM people WHERE email = 'luccavitalc@gmail.com'), (SELECT email FROM people WHERE email = 'luccavitalc@gmail.com'), '123456');
+            ((SELECT id FROM people WHERE email = 'lgctech7@gmail.com'), (SELECT email FROM people WHERE email = 'lgctech7@gmail.com'), '123456');
 
-        UPDATE users SET created_by = (SELECT id FROM user WHERE login = 'luccavitalc@gmail.com')
-        WHERE login = 'luccavitalc@gmail.com';
+        UPDATE users SET created_by = (SELECT id FROM user WHERE login = 'lgctech7@gmail.com')
+        WHERE login = 'lgctech7@gmail.com';
 
         ALTER TABLE users
             ALTER COLUMN created_by SET NOT NULL;
