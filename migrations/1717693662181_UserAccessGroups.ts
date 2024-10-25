@@ -16,7 +16,7 @@ export async function up(pgm: MigrationBuilder): Promise<void> {
 
         INSERT INTO user_access_groups (id_user, id_access_group)
         VALUES 
-            ((SELECT id FROM users WHERE login = 'luccavitalc@gmail.com'), (SELECT id FROM access_groups WHERE name = 'Administrador'));
+            ((SELECT id FROM users WHERE login = 'lgctech7@gmail.com'), (SELECT id FROM access_groups WHERE name = 'Administrador'));
     `);
 }
 
