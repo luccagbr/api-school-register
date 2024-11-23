@@ -1,5 +1,3 @@
-import "dotenv/config";
-
 import * as pgPromise from "pg-promise";
 import { IClient, IConnectionParameters } from "pg-promise/typescript/pg-subset";
 
