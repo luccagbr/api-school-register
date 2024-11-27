@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import { Router } from "express";
 import logger from "../utils/winston-logger";
 import { formatDateOrDateAndTime } from "../utils/formattings";
-import { createNewStudent, getAllStudents, getStudentById } from "../controllers/student-controller";
+import { createNewStudent, getAllStudents, getStudentById } from "../controllers/student.controller";
 const router = Router();
 
 const welcomeApi = (req: Request, res: Response) => {
